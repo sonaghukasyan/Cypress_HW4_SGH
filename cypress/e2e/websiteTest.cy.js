@@ -10,12 +10,6 @@ describe('Product Details Page Tests', () => {
         cy.visit('https://demo.nopcommerce.com/login?returnUrl=%2F');
     });
 
-    beforeEach(() => {
-        // Perform setup before each test
-        cy.viewport(1800, 1000);
-        homePage.navigateToHomePage();
-    });
-
     it('Test Valid Addition To Cart', () => {
         homePage.navigateToProductDetails(4);
         productDetailsPage.initProductFields();
