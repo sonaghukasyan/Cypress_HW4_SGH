@@ -9,7 +9,7 @@ class ProductDetailsPage {
 
     initProductFields() {
         const productId = cy.xpath(productDetailsPageLocators.dataProductXPath).invoke('attr', productDetailsPageLocators.productIdAttributeName);
-        this.reviewSection = cy.css(productDetailsPageLocators.reviewsCSS.replace('%s', productId));
+        this.reviewSection = cy.get(productDetailsPageLocators.reviewsCSS.replace('%s', productId)).should('have.css', 'color', 'rgb(255, 0, 0)');
         this.addToCartButton = cy.get(productDetailsPageLocators.addToCartCSS.replace('%s', productId));
         this.productQuantityField = cy.xpath(productDetailsPageLocators.productQuantityXPath.replace('%s', productId));
     }

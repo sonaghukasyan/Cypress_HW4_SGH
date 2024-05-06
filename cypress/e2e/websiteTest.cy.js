@@ -1,15 +1,22 @@
 /// <reference types="cypress" />
+
 import { homePage } from "../POM/homePage/homePage";
 import { productDetailsPage } from "../POM/productDetailsPage/productDetailsPage";
 
 describe('Product Details Page Tests', () => {
-    beforeEach(() => {
-        cy.viewport(1800, 1000);
+    before(() => {
+        // Perform setup before all tests
+        cy.log("Initializing WebDriver and navigating to the login page");
         cy.visit('https://demo.nopcommerce.com/login?returnUrl=%2F');
-    })
+    });
+
+    beforeEach(() => {
+        // Perform setup before each test
+        cy.viewport(1800, 1000);
+        homePage.navigateToHomePage();
+    });
 
     it('Test Valid Addition To Cart', () => {
-        homePage.navigateToHomePage();
         homePage.navigateToProductDetails(4);
         productDetailsPage.initProductFields();
         productDetailsPage.setProductQuantity("2");
@@ -18,7 +25,6 @@ describe('Product Details Page Tests', () => {
     });
 
     it('Test Invalid Addition To Cart', () => {
-        homePage.navigateToHomePage();
         homePage.navigateToProductDetails(4);
         productDetailsPage.initProductFields();
         productDetailsPage.setProductQuantity("0");
@@ -27,9 +33,14 @@ describe('Product Details Page Tests', () => {
     });
 
     it('Test Login Button Navigation', () => {
-        homePage.navigateToHomePage();
         homePage.navigateToLoginPage();
         cy.url().should('eq', 'https://demo.nopcommerce.com/login?returnUrl=%2F');
         loginPage.isLoginPageDisplayed().should('be.true');
+    });
+
+    after(() => {
+        // Perform teardown after all tests
+        cy.log("Quitting WebDriver");
+        // Note: We don't need to quit WebDriver since Cypress manages it automatically
     });
 });
