@@ -2,9 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://zangakbookstore.am/'
-  },
-  env: {
-    baseUrl: 'https://zangakbookstore.am/'
+    baseUrl: 'https://demo.nopcommerce.com/login?returnUrl=%2F',
+    watchForFileChanges: false
   }
 });

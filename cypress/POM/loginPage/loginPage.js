@@ -5,7 +5,8 @@ class LoginPage {
         email: () => { return cy.get(loginPageLocators.email); },
         password: () => { return cy.get(loginPageLocators.password); },
         loginButton: () => { return cy.get(loginPageLocators.loginButton).filter(':visible'); },
-        incorrectLogin: () => { return cy.get(loginPageLocators.loginError); }
+        incorrectLogin: () => { return cy.get(loginPageLocators.loginError); },
+        errorMessage: () => {return cy.get(loginPageLocators.loginError);}
     }
 
     enterEmail(email) {
@@ -27,9 +28,6 @@ class LoginPage {
         );
     }
 
-    isErrorMessageDisplayed() {
-        return cy.get(loginPageLocators.loginError).should('be.visible');
-    }
 
     getErrorMessage() {
         return cy.get(loginPageLocators.loginError).invoke('text');
