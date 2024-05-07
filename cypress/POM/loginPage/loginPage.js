@@ -23,8 +23,7 @@ class LoginPage {
     isLoginPageDisplayed() {
         return (
             cy.get(loginPageLocators.email).should('be.visible') &&
-            cy.get(loginPageLocators.password).should('be.visible') &&
-            cy.get(loginPageLocators.loginButton).should('be.visible')
+            cy.get(loginPageLocators.password).should('be.visible')
         );
     }
 

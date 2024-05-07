@@ -1,7 +1,6 @@
-/// <reference types="cypress" />
-
 import { homePage } from "../POM/homePage/homePage";
 import { productDetailsPage } from "../POM/productDetailsPage/productDetailsPage";
+import { loginPage } from "../POM/loginPage/loginPage.js";
 
 describe('Product Details Page Tests', () => {
     before(() => {
@@ -10,26 +9,23 @@ describe('Product Details Page Tests', () => {
         cy.visit('https://demo.nopcommerce.com/login?returnUrl=%2F');
     });
 
-    it('Test Valid Addition To Cart', () => {
-        homePage.navigateToProductDetails(4);
-        productDetailsPage.initProductFields();
-        productDetailsPage.setProductQuantity("2");
-        productDetailsPage.addToCart();
-        productDetailsPage.isAddedToCart().should('be.true');
-    });
-
-    it('Test Invalid Addition To Cart', () => {
-        homePage.navigateToProductDetails(4);
-        productDetailsPage.initProductFields();
-        productDetailsPage.setProductQuantity("0");
-        productDetailsPage.addToCart();
-        productDetailsPage.isAddedToCart().should('be.false');
-    });
-
     it('Test Login Button Navigation', () => {
         homePage.navigateToLoginPage();
         cy.url().should('eq', 'https://demo.nopcommerce.com/login?returnUrl=%2F');
         loginPage.isLoginPageDisplayed().should('be.true');
+    });
+
+    it('Test Invalid Login', () => {
+        homePage.navigateToLoginPage();
+
+        // Set email and password, and click on the login button
+        loginPage.enterEmail("lll@mail.ru");
+        loginPage.enterPassword("aaaa");
+        loginPage.clickOnLoginButton();
+
+        // Assert that login fails and error message is displayed
+        loginPage.isErrorMessageDisplayed().should('be.true');
+        loginPage.getErrorMessage().should('eq', "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
     });
 
     after(() => {

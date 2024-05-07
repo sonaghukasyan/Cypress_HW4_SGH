@@ -4,14 +4,10 @@ class HomePage {
     elements = {
         loginButton: () => { return cy.get(homePageLocators.loginButton); },
         productSection: () => { return cy.xpath(homePageLocators.productSectionXPath); },
-        productItems: () => { return cy.xpath(homePageLocators.productItemsXPath); },
-        logoutButton: () => { return cy.xpath(homePageLocators.logoutXPath); }
+        productItems: () => { return cy.xpath(homePageLocators.productItemsXPath); }
     }
 
     navigateToLoginPage() {
-        if (this.isLoggedIn()) {
-            this.logout();
-        }
         this.elements.loginButton().click();
     }
 
