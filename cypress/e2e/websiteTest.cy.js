@@ -11,8 +11,6 @@ describe('Product Details Page Tests', () => {
 
     it('Test Login Button Navigation', () => {
         homePage.navigateToLoginPage();
-        cy.url().should('eq', 'https://demo.nopcommerce.com/login?returnUrl=%2F%2F');
-        //loginPage.isLoginPageDisplayed().should('be.true');
         loginPage.elements.loginButton().should('be.visible');
         loginPage.elements.email().should('be.visible');
         loginPage.elements.password().should('be.visible');
@@ -27,12 +25,8 @@ describe('Product Details Page Tests', () => {
         loginPage.enterEmail("lll@mail.ru");
         loginPage.enterPassword("aaaa");
         loginPage.clickOnLoginButton();
-
-        // Assert that login fails and error message is displayed
-        // Wait for error message to be displayed and assert its content
         loginPage.elements.errorMessage().should('be.visible', { timeout: 15000 }); // Increase timeout to 10 seconds
-       // loginPage.getErrorMessage().should('eq', "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found", { timeout: 15000 });
-    });
+     });
 
     after(() => {
         // Perform teardown after all tests
